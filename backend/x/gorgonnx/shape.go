@@ -2,6 +2,7 @@ package gorgonnx
 
 import (
 	"errors"
+
 	"github.com/owulveryck/onnx-go"
 	"gorgonia.org/gorgonia"
 	"gorgonia.org/tensor"
@@ -24,7 +25,7 @@ func (*shape) apply(graph *Graph, nodes ...*Node) error {
 	}
 	s := []int(children[0].gorgoniaNode.Shape())
 	t := tensor.New(tensor.WithShape(len(s)), tensor.WithBacking(s))
-	nodes[0].gorgoniaNode = gorgonia.NewConstant(t)
+	nodes[0].gorgoniaNode = graph.exprgraph.AddNode(gorgonia.NewConstant(t))
 
 	return nil
 }

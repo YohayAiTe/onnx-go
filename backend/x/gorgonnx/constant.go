@@ -19,7 +19,7 @@ func newConstant() operator {
 
 func (a *constant) apply(g *Graph, ns ...*Node) error {
 	n := ns[0]
-	n.gorgoniaNode = a.value
+	n.gorgoniaNode = g.exprgraph.AddNode(a.value)
 	return nil
 }
 
